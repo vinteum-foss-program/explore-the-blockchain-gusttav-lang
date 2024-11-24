@@ -13,10 +13,10 @@ transactions=$(bitcoin-cli getrawtransaction "37d966a263350fe747f1c606b159987545
 #tx4=$(echo "$transactions" | jq -r .vin.[3].txid)
 #tx4Witness=$(echo "$transactions" | jq -r .vin.[3].txinwitness)
 
-tx1PubKey=$(echo "$transactions" | jq '.vin.[0].txinwitness.[1]')
-tx2PubKey=$(echo "$transactions" | jq '.vin.[1].txinwitness.[1]')
-tx3PubKey=$(echo "$transactions" | jq '.vin.[2].txinwitness.[1]')
-tx4PubKey=$(echo "$transactions" | jq '.vin.[3].txinwitness.[1]')
+tx1PubKey=$(echo "$transactions" | jq '.vin[0].txinwitness[1]')
+tx2PubKey=$(echo "$transactions" | jq '.vin[1].txinwitness[1]')
+tx3PubKey=$(echo "$transactions" | jq '.vin[2].txinwitness[1]')
+tx4PubKey=$(echo "$transactions" | jq '.vin[3].txinwitness[1]')
 
 #echo $tx1
 #echo $tx1Witness
