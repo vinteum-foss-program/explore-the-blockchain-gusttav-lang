@@ -7,7 +7,7 @@ block=$(bitcoin-cli getblock $blockHash)
 #echo $block
 
 # Step 2: get the coinbase transaction (the first output)
-coinbaseTxId=$(echo $block |  jq -r .tx.[0])
+coinbaseTxId=$(echo $block |  jq -r '.tx.[0]')
 # echo "coinbaseTxId $coinbaseTxId"
 # coinbaseTx=$(./bitcoin-cli  getrawtransaction $coinbaseTxId true)
 # echo $coinbaseTx
@@ -19,9 +19,9 @@ block=$(bitcoin-cli getblock $blockHash)
 #echo $block
 
 # Step 4: iterate in all transactions to find the previous address as the input
-numberOfTransactions=$(echo $block | jq -r .nTx)
+numberOfTransactions=$(echo $block | jq -r '.nTx')
 for i in $(seq 1 $((numberOfTransactions - 1))); do # skip the first since it is the coinbase
-  txId=$(echo $block |  jq -r .tx.[$i])
+  txId=$(echo $block |  jq -r '.tx.[$i]')
   tx=$(bitcoin-cli getrawtransaction $txId true)
   vinLength=$(echo $tx | jq -r '.vin | length')
   for j in $(seq 0 $((vinLength - 1))); do
